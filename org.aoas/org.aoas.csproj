@@ -44,6 +44,28 @@
     <Compile Include="attributes\ExceptionHandleAttribute.cs" />
     <Compile Include="attributes\IgnorableAttribute.cs" />
     <Compile Include="CancellationProvider.cs" />
+    <Compile Include="config\XmlConfiguration.cs" />
+    <Compile Include="config\XmlConfigurationArray.cs" />
+    <Compile Include="config\XmlConfigurationElement.cs" />
+    <Compile Include="config\XmlConfigurationProperty.cs" />
+    <Compile Include="config\XmlConfigurationPropertyBoolean.cs" />
+    <Compile Include="config\XmlConfigurationPropertyByte.cs" />
+    <Compile Include="config\XmlConfigurationPropertyChar.cs" />
+    <Compile Include="config\XmlConfigurationPropertyDateTime.cs" />
+    <Compile Include="config\XmlConfigurationPropertyDecimal.cs" />
+    <Compile Include="config\XmlConfigurationPropertyDouble.cs" />
+    <Compile Include="config\XmlConfigurationPropertyInt16.cs" />
+    <Compile Include="config\XmlConfigurationPropertyInt32.cs" />
+    <Compile Include="config\XmlConfigurationPropertyInt64.cs" />
+    <Compile Include="config\XmlConfigurationPropertyNullableBoolean.cs" />
+    <Compile Include="config\XmlConfigurationPropertyNullableByte.cs" />
+    <Compile Include="config\XmlConfigurationPropertyNullableInt32.cs" />
+    <Compile Include="config\XmlConfigurationPropertySByte.cs" />
+    <Compile Include="config\XmlConfigurationPropertySingle.cs" />
+    <Compile Include="config\XmlConfigurationPropertyString.cs" />
+    <Compile Include="config\XmlConfigurationPropertyUInt16.cs" />
+    <Compile Include="config\XmlConfigurationPropertyUInt32.cs" />
+    <Compile Include="config\XmlConfigurationPropertyUInt64.cs" />
     <Compile Include="DisposeDependancy.cs" />
     <Compile Include="EnumDependancy.cs" />
     <Compile Include="EqualityDependancy.cs" />
@@ -69,8 +91,6 @@
     <Compile Include="PropertySerializationDependancy.cs" />
     <Compile Include="SerializationDependancy.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="config\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

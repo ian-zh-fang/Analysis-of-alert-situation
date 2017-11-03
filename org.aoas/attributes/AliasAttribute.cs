@@ -29,7 +29,9 @@ namespace org.aoas.attributes
         String Name { get; }
     }
 
-    // 属性别名
+    /// <summary>
+    /// 属性别名
+    /// </summary>
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
     public sealed class AliasAttribute : Attribute, IAlias
     {

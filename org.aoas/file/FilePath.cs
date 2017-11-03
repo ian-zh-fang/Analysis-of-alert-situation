@@ -92,7 +92,7 @@ namespace org.aoas.file
         public bool IsValid { get; private set; }
 
         /// <summary>
-        /// 有效的路径，若原始路径信息不是有效的
+        /// 有效的路径，若原始路径信息不是有效的，返回 null
         /// </summary>
         public string ValidPath { get; private set; }
 
