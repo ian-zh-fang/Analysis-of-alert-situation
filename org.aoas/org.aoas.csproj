@@ -40,12 +40,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DateTimeEx.cs" />
-    <Compile Include="ObjectEx.cs" />
+    <Compile Include="attributes\AliasAttribute.cs" />
+    <Compile Include="attributes\ExceptionHandleAttribute.cs" />
+    <Compile Include="attributes\IgnorableAttribute.cs" />
+    <Compile Include="CancellationProvider.cs" />
+    <Compile Include="DisposeDependancy.cs" />
+    <Compile Include="EnumDependancy.cs" />
+    <Compile Include="EqualityDependancy.cs" />
+    <Compile Include="exceptions\FileNotFoundException.cs" />
+    <Compile Include="exceptions\RetryLimitException.cs" />
+    <Compile Include="ExecutableDependancy.cs" />
+    <Compile Include="extentions\DateTimeEx.cs" />
+    <Compile Include="extentions\ObjectEx.cs" />
+    <Compile Include="file\BaseFileFinder.cs" />
+    <Compile Include="file\FileFinder.cs" />
+    <Compile Include="file\FilePath.cs" />
+    <Compile Include="file\FilePathEx.cs" />
+    <Compile Include="file\IFileFinder.cs" />
+    <Compile Include="IContrainer.cs" />
+    <Compile Include="IEqualityDependancy.cs" />
+    <Compile Include="log\ILogContext.cs" />
+    <Compile Include="log\ILogger.cs" />
+    <Compile Include="log\LogContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StringEx.cs" />
-    <Compile Include="ThrowEx.cs" />
-    <Compile Include="TypeEx.cs" />
+    <Compile Include="extentions\StringEx.cs" />
+    <Compile Include="extentions\ThrowEx.cs" />
+    <Compile Include="extentions\TypeEx.cs" />
+    <Compile Include="PropertySerializationDependancy.cs" />
+    <Compile Include="SerializationDependancy.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="config\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
