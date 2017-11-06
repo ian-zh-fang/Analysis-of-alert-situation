@@ -77,6 +77,16 @@ namespace org.aoas
             return !(left == right);
         }
 
+        public static bool operator >=(EqualityDependancy<TSource> left, EqualityDependancy<TSource> right)
+        {
+            return 0 <= left.CompareTo(right as TSource);
+        }
+
+        public static bool operator <=(EqualityDependancy<TSource> left, EqualityDependancy<TSource> right)
+        {
+            return 0 >= left.CompareTo(right as TSource);
+        }
+
         // 获取当前对象的 HashCode
         protected abstract Int32 GetHash();
 
