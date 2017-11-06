@@ -25,6 +25,30 @@ namespace org.aoas.config
     using System;
 
     public sealed class XmlConfigurationPropertyDecimal
+        :XmlConfigurationProperty<Decimal>
     {
+        public XmlConfigurationPropertyDecimal()
+            :base()
+        { }
+
+        public XmlConfigurationPropertyDecimal(decimal value)
+            :base(value)
+        { }
+
+        public static implicit operator XmlConfigurationPropertyDecimal(decimal value)
+        {
+            return new XmlConfigurationPropertyDecimal(value);
+        }
+
+        public static implicit operator decimal(XmlConfigurationPropertyDecimal pro)
+        {
+            pro.ThrowIfNull();
+            return pro.Value;
+        }
+
+        protected override object GetValue(string valueStr, Type valueType)
+        {
+            return decimal.Parse(valueStr);
+        }
     }
 }

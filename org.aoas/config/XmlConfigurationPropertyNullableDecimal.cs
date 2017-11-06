@@ -1,14 +1,14 @@
 ﻿
 /*
  * guid: $GUID$
- * file: XmlConfigurationPropertyNullableByte
+ * file: XmlConfigurationPropertyNullableDecimal
  * clr: 4.0.30319.42000
  * machine: DESKTOP-9902656
  * framework: 4.5
  ***********************************
  *
  * author: fangzhen
- * create: 2017/11/3 16:38:03
+ * create: 2017/11/6 11:18:43
  * desc: 
  ************************************
  *
@@ -24,33 +24,33 @@ namespace org.aoas.config
 {
     using System;
 
-    public sealed class XmlConfigurationPropertyNullableByte
-        :XmlConfigurationProperty<Byte?>
+    public sealed class XmlConfigurationPropertyNullableDecimal
+        :XmlConfigurationProperty<Decimal?>
     {
-        public XmlConfigurationPropertyNullableByte()
+        public XmlConfigurationPropertyNullableDecimal()
             :base()
         { }
 
-        public XmlConfigurationPropertyNullableByte(byte? value)
+        public XmlConfigurationPropertyNullableDecimal(decimal? value)
             :base(value)
         { }
 
-        public static implicit operator XmlConfigurationPropertyNullableByte(byte? value)
+        public static implicit operator XmlConfigurationPropertyNullableDecimal(decimal? value)
         {
-            return new XmlConfigurationPropertyNullableByte(value);
+            return new XmlConfigurationPropertyNullableDecimal(value);
         }
 
-        public static implicit operator XmlConfigurationPropertyNullableByte(byte value)
+        public static implicit operator XmlConfigurationPropertyNullableDecimal(decimal value)
         {
             return value;
         }
 
-        public static implicit operator byte?(XmlConfigurationPropertyNullableByte pro)
+        public static implicit operator decimal?(XmlConfigurationPropertyNullableDecimal pro)
         {
             return pro?.Value;
         }
 
-        public static implicit operator byte(XmlConfigurationPropertyNullableByte pro)
+        public static implicit operator decimal(XmlConfigurationPropertyNullableDecimal pro)
         {
             var val = pro?.Value;
             val.ThrowIfNull();
@@ -62,7 +62,7 @@ namespace org.aoas.config
         {
             if (valueStr.IsWhitespaces()) { return null; }
 
-            return byte.Parse(valueStr);
+            return decimal.Parse(valueStr);
         }
     }
 }

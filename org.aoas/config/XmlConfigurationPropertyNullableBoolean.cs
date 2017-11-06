@@ -35,11 +35,34 @@ namespace org.aoas.config
             :base(value)
         { }
 
+        public static implicit operator XmlConfigurationPropertyNullableBoolean(bool? value)
+        {
+            return new XmlConfigurationPropertyNullableBoolean(value);
+        }
+
+        public static implicit operator XmlConfigurationPropertyNullableBoolean(bool value)
+        {
+            return value;
+        }
+
+        public static implicit operator bool?(XmlConfigurationPropertyNullableBoolean pro)
+        {
+            return pro?.Value;
+        }
+
+        public static implicit operator bool(XmlConfigurationPropertyNullableBoolean pro)
+        {
+            var val = pro?.Value;
+            val.ThrowIfNull();
+
+            return val.Value;
+        }
+
         protected override object GetValue(string valueStr, Type valueType)
         {
             if (valueStr.IsWhitespaces()) { return null; }
 
-            return bool.Parse(valueStr);
+            return bool.Parse(valueStr.ToLower());
         }
     }
 }

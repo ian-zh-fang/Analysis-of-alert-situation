@@ -25,6 +25,30 @@ namespace org.aoas.config
     using System;
 
     public sealed class XmlConfigurationPropertyUInt16
+        :XmlConfigurationProperty<UInt16>
     {
+        public XmlConfigurationPropertyUInt16()
+            :base()
+        { }
+
+        public XmlConfigurationPropertyUInt16(ushort v)
+            :base(v)
+        { }
+
+        public static implicit operator XmlConfigurationPropertyUInt16(ushort v)
+        {
+            return new XmlConfigurationPropertyUInt16(v);
+        }
+
+        public static implicit operator ushort(XmlConfigurationPropertyUInt16 pro)
+        {
+            pro.ThrowIfNull();
+            return pro.Value;
+        }
+
+        protected override object GetValue(string valueStr, Type valueType)
+        {
+            return ushort.Parse(valueStr);
+        }
     }
 }

@@ -35,6 +35,17 @@ namespace org.aoas.config
             :base(value)
         { }
 
+        public static implicit operator XmlConfigurationPropertyBoolean(bool value)
+        {
+            return new XmlConfigurationPropertyBoolean(value);
+        }
+
+        public static implicit operator bool(XmlConfigurationPropertyBoolean pro)
+        {
+            pro.ThrowIfNull();
+            return pro.Value;
+        }
+
         protected override object GetValue(string valueStr, Type valueType)
         {
             return bool.Parse(valueStr);

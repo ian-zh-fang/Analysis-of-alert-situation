@@ -25,6 +25,30 @@ namespace org.aoas.config
     using System;
 
     public sealed class XmlConfigurationPropertyUInt64
+        :XmlConfigurationProperty<UInt64>
     {
+        public XmlConfigurationPropertyUInt64()
+            :base()
+        { }
+
+        public XmlConfigurationPropertyUInt64(ulong v)
+            :base(v)
+        { }
+
+        public static implicit operator XmlConfigurationPropertyUInt64(ulong v)
+        {
+            return new XmlConfigurationPropertyUInt64(v);
+        }
+
+        public static implicit operator ulong(XmlConfigurationPropertyUInt64 pro)
+        {
+            pro.ThrowIfNull();
+            return pro.Value;
+        }
+
+        protected override object GetValue(string valueStr, Type valueType)
+        {
+            return ulong.Parse(valueStr);
+        }
     }
 }

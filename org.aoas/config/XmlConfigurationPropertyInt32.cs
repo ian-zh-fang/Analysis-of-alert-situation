@@ -40,7 +40,7 @@ namespace org.aoas.config
             return new XmlConfigurationPropertyInt32(value);
         }
 
-        public static explicit operator int(XmlConfigurationPropertyInt32 pro)
+        public static implicit operator int(XmlConfigurationPropertyInt32 pro)
         {
             pro.ThrowIfNull(nameof(pro));
             return pro.Value;

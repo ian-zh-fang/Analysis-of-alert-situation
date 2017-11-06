@@ -35,28 +35,33 @@ namespace org.aoas.config
             :base(value)
         { }
 
-        public XmlConfigurationPropertyNullableInt32(int value)
-            :base(value)
-        { }
-
-        public static implicit operator XmlConfigurationPropertyNullableInt32(int value)
-        {
-            return new XmlConfigurationPropertyNullableInt32(value);
-        }
-
         public static implicit operator XmlConfigurationPropertyNullableInt32(int? value)
         {
             return new XmlConfigurationPropertyNullableInt32(value);
         }
 
-        public static explicit operator int?(XmlConfigurationPropertyNullableInt32 pro)
+        public static implicit operator XmlConfigurationPropertyNullableInt32(int value)
         {
-            if (pro.IsNull()) { return null; }
-            return pro.Value;
+            return value;
+        }
+
+        public static implicit operator int?(XmlConfigurationPropertyNullableInt32 pro)
+        {
+            return pro?.Value;
+        }
+
+        public static implicit operator int(XmlConfigurationPropertyNullableInt32 pro)
+        {
+            var val = pro?.Value;
+            val.ThrowIfNull();
+
+            return val.Value;
         }
 
         protected override object GetValue(string valueStr, Type valueType)
         {
+            if (valueStr.IsWhitespaces()) { return null; }
+
             return int.Parse(valueStr);
         }
     }

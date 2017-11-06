@@ -35,6 +35,17 @@ namespace org.aoas.config
             :base(value)
         { }
 
+        public static implicit operator XmlConfigurationPropertyByte(byte value)
+        {
+            return new XmlConfigurationPropertyByte(value);
+        }
+
+        public static implicit operator byte(XmlConfigurationPropertyByte pro)
+        {
+            pro.ThrowIfNull();
+            return pro.Value;
+        }
+
         protected override object GetValue(string valueStr, Type valueType)
         {
             return byte.Parse(valueStr);

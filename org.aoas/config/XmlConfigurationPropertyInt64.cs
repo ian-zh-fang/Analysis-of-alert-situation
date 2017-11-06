@@ -25,6 +25,30 @@ namespace org.aoas.config
     using System;
 
     public sealed class XmlConfigurationPropertyInt64
+        :XmlConfigurationProperty<Int64>
     {
+        public XmlConfigurationPropertyInt64()
+            :base()
+        { }
+
+        public XmlConfigurationPropertyInt64(long v)
+            :base(v)
+        { }
+
+        public static implicit operator XmlConfigurationPropertyInt64(long v)
+        {
+            return new XmlConfigurationPropertyInt64(v);
+        }
+
+        public static implicit operator long(XmlConfigurationPropertyInt64 pro)
+        {
+            pro.ThrowIfNull();
+            return pro.Value;
+        }
+
+        protected override object GetValue(string valueStr, Type valueType)
+        {
+            return long.Parse(valueStr);
+        }
     }
 }

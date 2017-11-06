@@ -1,14 +1,14 @@
 ﻿
 /*
  * guid: $GUID$
- * file: XmlConfigurationPropertyNullableByte
+ * file: XmlConfigurationPropertyNullableChar
  * clr: 4.0.30319.42000
  * machine: DESKTOP-9902656
  * framework: 4.5
  ***********************************
  *
  * author: fangzhen
- * create: 2017/11/3 16:38:03
+ * create: 2017/11/6 10:56:08
  * desc: 
  ************************************
  *
@@ -24,33 +24,32 @@ namespace org.aoas.config
 {
     using System;
 
-    public sealed class XmlConfigurationPropertyNullableByte
-        :XmlConfigurationProperty<Byte?>
+    public sealed class XmlConfigurationPropertyNullableChar:XmlConfigurationProperty<char?>
     {
-        public XmlConfigurationPropertyNullableByte()
-            :base()
+        public XmlConfigurationPropertyNullableChar()
+            : base()
         { }
 
-        public XmlConfigurationPropertyNullableByte(byte? value)
+        public XmlConfigurationPropertyNullableChar(char? value)
             :base(value)
         { }
 
-        public static implicit operator XmlConfigurationPropertyNullableByte(byte? value)
+        public static implicit operator XmlConfigurationPropertyNullableChar(char? value)
         {
-            return new XmlConfigurationPropertyNullableByte(value);
+            return new XmlConfigurationPropertyNullableChar(value);
         }
 
-        public static implicit operator XmlConfigurationPropertyNullableByte(byte value)
+        public static implicit operator XmlConfigurationPropertyNullableChar(char value)
         {
             return value;
         }
 
-        public static implicit operator byte?(XmlConfigurationPropertyNullableByte pro)
+        public static implicit operator char?(XmlConfigurationPropertyNullableChar pro)
         {
             return pro?.Value;
         }
 
-        public static implicit operator byte(XmlConfigurationPropertyNullableByte pro)
+        public static implicit operator char(XmlConfigurationPropertyNullableChar pro)
         {
             var val = pro?.Value;
             val.ThrowIfNull();
@@ -62,7 +61,7 @@ namespace org.aoas.config
         {
             if (valueStr.IsWhitespaces()) { return null; }
 
-            return byte.Parse(valueStr);
+            return char.Parse(valueStr);
         }
     }
 }

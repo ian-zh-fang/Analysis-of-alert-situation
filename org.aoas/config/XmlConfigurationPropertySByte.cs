@@ -25,6 +25,31 @@ namespace org.aoas.config
     using System;
 
     public sealed class XmlConfigurationPropertySByte
+        :XmlConfigurationProperty<SByte>
     {
+        public XmlConfigurationPropertySByte()
+            :base()
+        { }
+
+        public XmlConfigurationPropertySByte(sbyte v)
+            :base(v)
+        { }
+
+        public static implicit operator XmlConfigurationPropertySByte(sbyte v)
+        {
+            return new XmlConfigurationPropertySByte(v);
+        }
+
+        public static implicit operator sbyte(XmlConfigurationPropertySByte pro)
+        {
+            pro.ThrowIfNull();
+
+            return pro.Value;
+        }
+
+        protected override object GetValue(string valueStr, Type valueType)
+        {
+            return sbyte.Parse(valueStr);
+        }
     }
 }

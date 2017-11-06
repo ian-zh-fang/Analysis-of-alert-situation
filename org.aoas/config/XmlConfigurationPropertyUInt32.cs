@@ -25,6 +25,30 @@ namespace org.aoas.config
     using System;
 
     public sealed class XmlConfigurationPropertyUInt32
+        :XmlConfigurationProperty<UInt32>
     {
+        public XmlConfigurationPropertyUInt32()
+            :base()
+        { }
+
+        public XmlConfigurationPropertyUInt32(uint v)
+            :base(v)
+        { }
+
+        public static implicit operator XmlConfigurationPropertyUInt32(uint v)
+        {
+            return new XmlConfigurationPropertyUInt32(v);
+        }
+
+        public static implicit operator uint(XmlConfigurationPropertyUInt32 pro)
+        {
+            pro.ThrowIfNull();
+            return pro.Value;
+        }
+
+        protected override object GetValue(string valueStr, Type valueType)
+        {
+            return uint.Parse(valueStr);
+        }
     }
 }
