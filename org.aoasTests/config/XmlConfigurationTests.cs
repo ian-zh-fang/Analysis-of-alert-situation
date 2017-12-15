@@ -69,7 +69,7 @@ namespace org.aoas.config.Tests
                 :base()
             { }
 
-            protected override XmlConfigurationElement OnGetChildElement(System.Xml.XmlReader reader)
+            protected override XmlConfigurationElement OnGetChildElement(XmlReader reader)
             {
                 return new XmlConfigurationItem();
             }
