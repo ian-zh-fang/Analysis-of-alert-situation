@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlertCategory.cs" />
+    <Compile Include="AlertTotalWithinArea.cs" />
+    <Compile Include="AreaInf.cs" />
     <Compile Include="BaseEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

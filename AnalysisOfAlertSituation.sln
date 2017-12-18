@@ -7,6 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "org.aoas", "org.aoas\org.ao
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A5F80DD1-4ABE-4D03-AC50-18BD38ECBA58}"
 	ProjectSection(SolutionItems) = preProject
+		createdatabase.sql = createdatabase.sql
+		createtable.sql = createtable.sql
+		initquery.sql = initquery.sql
 		README.md = README.md
 	EndProjectSection
 EndProject
