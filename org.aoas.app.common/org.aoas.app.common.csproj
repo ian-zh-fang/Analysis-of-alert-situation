@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F3C96528-8F94-403C-95C8-02A304926A4A}</ProjectGuid>
+    <ProjectGuid>{94515E62-9B4D-40E1-8CAB-A54216497E6F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>org.aoas.app.repository</RootNamespace>
-    <AssemblyName>org.aoas.app.repository</AssemblyName>
+    <RootNamespace>org.aoas.app.common</RootNamespace>
+    <AssemblyName>org.aoas.app.common</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,17 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ICache.cs" />
-    <Compile Include="IRepository.cs" />
-    <Compile Include="IUnitWork.cs" />
-    <Compile Include="MemoryCache.cs" />
+    <Compile Include="CaptchaGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\org.aoas.app.common\org.aoas.app.common.csproj">
-      <Project>{94515e62-9b4d-40e1-8cab-a54216497e6f}</Project>
-      <Name>org.aoas.app.common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\org.aoas\org.aoas.csproj">
       <Project>{84101e50-de90-4092-a464-7cd62a96b6f4}</Project>
       <Name>org.aoas</Name>

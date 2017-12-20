@@ -35,6 +35,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "org.aoas.app.repository", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "org.aoas.app.repository.entity", "org.aoas.app.repository.entity\org.aoas.app.repository.entity.csproj", "{3ED0AF0B-AA3F-4FF7-BC26-ADF65D6E2AB9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "org.aoas.app.common", "org.aoas.app.common\org.aoas.app.common.csproj", "{94515E62-9B4D-40E1-8CAB-A54216497E6F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{3ED0AF0B-AA3F-4FF7-BC26-ADF65D6E2AB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3ED0AF0B-AA3F-4FF7-BC26-ADF65D6E2AB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3ED0AF0B-AA3F-4FF7-BC26-ADF65D6E2AB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94515E62-9B4D-40E1-8CAB-A54216497E6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94515E62-9B4D-40E1-8CAB-A54216497E6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94515E62-9B4D-40E1-8CAB-A54216497E6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94515E62-9B4D-40E1-8CAB-A54216497E6F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -81,6 +87,7 @@ Global
 		{C48CAD97-A332-4D81-B735-10776F32C40A} = {DF3F6173-3A72-48DA-9846-B58524322758}
 		{F3C96528-8F94-403C-95C8-02A304926A4A} = {EA4A2B2A-9E01-48A4-8862-F5D236498372}
 		{3ED0AF0B-AA3F-4FF7-BC26-ADF65D6E2AB9} = {EA4A2B2A-9E01-48A4-8862-F5D236498372}
+		{94515E62-9B4D-40E1-8CAB-A54216497E6F} = {DF3F6173-3A72-48DA-9846-B58524322758}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3D75C629-3A9A-4080-A16B-DFEDADC6B619}

@@ -45,10 +45,21 @@
     <Compile Include="AlertTotalWithinArea.cs" />
     <Compile Include="AreaInf.cs" />
     <Compile Include="BaseEntity.cs" />
+    <Compile Include="KeyContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\org.aoas.app.common\org.aoas.app.common.csproj">
+      <Project>{94515e62-9b4d-40e1-8cab-a54216497e6f}</Project>
+      <Name>org.aoas.app.common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\org.aoas\org.aoas.csproj">
+      <Project>{84101e50-de90-4092-a464-7cd62a96b6f4}</Project>
+      <Name>org.aoas</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
