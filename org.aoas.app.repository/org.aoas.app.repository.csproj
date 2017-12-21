@@ -51,6 +51,10 @@
       <Project>{94515e62-9b4d-40e1-8cab-a54216497e6f}</Project>
       <Name>org.aoas.app.common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\org.aoas.app.repository.entity\org.aoas.app.repository.entity.csproj">
+      <Project>{3ed0af0b-aa3f-4ff7-bc26-adf65d6e2ab9}</Project>
+      <Name>org.aoas.app.repository.entity</Name>
+    </ProjectReference>
     <ProjectReference Include="..\org.aoas\org.aoas.csproj">
       <Project>{84101e50-de90-4092-a464-7cd62a96b6f4}</Project>
       <Name>org.aoas</Name>

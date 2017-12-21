@@ -43,6 +43,12 @@
     <Compile Include="attributes\AliasAttribute.cs" />
     <Compile Include="attributes\ExceptionHandleAttribute.cs" />
     <Compile Include="attributes\IgnorableAttribute.cs" />
+    <Compile Include="cache\Cache.cs" />
+    <Compile Include="cache\CachePolicy.cs" />
+    <Compile Include="cache\ICache.cs" />
+    <Compile Include="cache\ICachePolicy.cs" />
+    <Compile Include="cache\ICacheContext.cs" />
+    <Compile Include="cache\MemoryCache.cs" />
     <Compile Include="CancellationProvider.cs" />
     <Compile Include="config\XmlConfiguration.cs" />
     <Compile Include="config\XmlConfigurationArray.cs" />
