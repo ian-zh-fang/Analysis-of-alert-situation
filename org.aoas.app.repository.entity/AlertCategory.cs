@@ -25,7 +25,7 @@ namespace org.aoas.app.repository.entity
     /// <summary>
     /// 警情分类信息
     /// </summary>
-    public sealed class AlertCategory
+    public sealed class AlertCategory:BaseEntityKeyInt64
     {
         /// <summary>
         /// 名称
@@ -45,6 +45,18 @@ namespace org.aoas.app.repository.entity
         /// <summary>
         /// 上一级警情分类
         /// </summary>
-        public int Pid { get; set; }
+        public long Pid { get; set; }
+
+        /// <summary>
+        /// 是否删除
+        /// </summary>
+        public byte IsDel { get; set; }
+
+        /// <summary>
+        /// 同步主键 ID
+        /// </summary>
+        public string SyncId { get; set; }
+
+        protected override KeyContext Context => KeyContext.TableAlertCategory;
     }
 }

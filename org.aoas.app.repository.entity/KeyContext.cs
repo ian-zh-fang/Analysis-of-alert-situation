@@ -76,12 +76,12 @@ namespace org.aoas.app.repository.entity
         /// <summary>
         /// 辖区
         /// </summary>
-        public static readonly KeyContext TableArea = new KeyContext(0x00, "t_area", "辖区");
+        public static readonly KeyContext TableAreaInf = new KeyContext(0x00, "t_areainf", "辖区");
 
         /// <summary>
         /// 警情类型
         /// </summary>
-        public static readonly KeyContext TableAlertCate = new KeyContext(0x01, "t_alertcate", "警情类型");
+        public static readonly KeyContext TableAlertCategory = new KeyContext(0x01, "t_alertcate", "警情类型");
 
         /// <summary>
         /// 辖区警情类型统计

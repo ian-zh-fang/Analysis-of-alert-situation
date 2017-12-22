@@ -1,15 +1,15 @@
 ﻿
 /*
  * guid: $GUID$
- * file: ICachePolicyContext
+ * file: IDbConfiguration
  * clr: 4.0.30319.42000
  * machine: DESKTOP-9902656
  * framework: 4.5
  ***********************************
  *
  * author: fangzhen
- * create: 2017/12/21 15:39:10
- * desc: 一组缓存上下文功能约定
+ * create: 2017/12/22 17:13:59
+ * desc: 
  ************************************
  *
  * upgrade history:
@@ -20,23 +20,23 @@
  * 
  */
 
-namespace org.aoas.cache
+namespace org.aoas.app.repository.entityframework
 {
     using System;
 
     /// <summary>
-    /// 旨在声明一组缓存上下文功能约定
+    /// 旨在约定一组数据库配置业务功能
     /// </summary>
-    public interface ICacheContext : IDisposable
+    public interface IDbConfiguration
     {
         /// <summary>
-        /// 缓存上下文初始化时，发生当前事件
+        /// 数据库链接字符串或者名称
         /// </summary>
-        event Action OnInit;
+        String ConnectionStringOrName { get; }
 
         /// <summary>
-        /// 缓存上下文数据发生改变时，触发当前事件
+        /// 数据库架构或者所属用户名称
         /// </summary>
-        event Action OnChange;
+        String OwnerOrSchema { get; }
     }
 }

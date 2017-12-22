@@ -68,10 +68,15 @@ namespace org.aoas.cache
                 if (value.IsNull()) { return; }
 
                 // 先解除之前的事件回调
-                if (!_context.IsNull()) { _context.OnChange -= OnChangeCallback; }
+                if (!_context.IsNull())
+                {
+                    _context.OnChange -= OnChangeCallback;
+                    _context.OnInit -= OnInitCallback;
+                }
                 _context = value;
 
                 // 重新设置新的事件回调
+                _context.OnInit += OnInitCallback;
                 _context.OnChange += OnChangeCallback;
             }
         }
@@ -82,6 +87,22 @@ namespace org.aoas.cache
             if (sta) { OnInvalidInvokeAsync(); }
 
             return sta;
+        }
+
+        /// <summary>
+        /// 缓存上下文初始化时，事件回调处理函数
+        /// </summary>
+        private void OnInitCallback()
+        {
+            ((ICachePolicy)this).Check();
+        }
+
+        /// <summary>
+        /// 缓存发生改变时，事件回调处理函数
+        /// </summary>
+        protected virtual void OnChangeCallback()
+        {
+            OnInvalidInvokeAsync();
         }
 
         /// <summary>
@@ -100,11 +121,6 @@ namespace org.aoas.cache
             _context.Dispose();
             _onInvalid = null;
         }
-
-        /// <summary>
-        /// 缓存发生改变时，事件回调处理函数
-        /// </summary>
-        protected abstract void OnChangeCallback();
 
         /// <summary>
         /// 校验缓存是否失效，若缓存失效，返回 true；否则，返回 false .

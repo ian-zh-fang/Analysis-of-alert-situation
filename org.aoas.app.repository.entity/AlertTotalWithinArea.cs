@@ -27,22 +27,22 @@ namespace org.aoas.app.repository.entity
     /// <summary>
     /// 区域内警情数量统计
     /// </summary>
-    public sealed class AlertTotalWithinArea
+    public sealed class AlertTotalWithinArea:BaseEntityKeyInt64
     {
         /// <summary>
         /// 辖区标识
         /// </summary>
-        public int AreaId { get; set; }
+        public long AreaId { get; set; }
 
         /// <summary>
         /// 警情分类标识
         /// </summary>
-        public int AlertId { get; set; }
+        public long AlertId { get; set; }
         
         /// <summary>
         /// 警情数量
         /// </summary>
-        public int Count { get; set; }
+        public uint Count { get; set; }
 
         /// <summary>
         /// 当前记录创建时间
@@ -53,5 +53,12 @@ namespace org.aoas.app.repository.entity
         /// 当前记录最后更新时间
         /// </summary>
         public long UTime { get; set; }
+
+        /// <summary>
+        /// 同步主键 ID
+        /// </summary>
+        public string SyncId { get; set; }
+
+        protected override KeyContext Context => KeyContext.TableAlertTotalForArea;
     }
 }

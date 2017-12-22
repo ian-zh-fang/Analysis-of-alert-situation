@@ -68,13 +68,13 @@ namespace org.aoas.app.repository
         /// <exception cref="ArgumentNullException">predicate is null.</exception>
         /// <exception cref="AggregateException">仓库内部错误</exception>
         /// <returns></returns>
-        IEnumerable<TEntity> Delete(Func<TEntity> predicate);
+        IEnumerable<TEntity> Delete(Func<TEntity, Boolean> predicate);
 
         /// <summary>
         /// 筛选数据仓库中指定条件下的实体数据，并返回查询对象
         /// </summary>
         /// <param name="predicate">指定筛选条件</param>
         /// <returns></returns>
-        IQueryable<TEntity> Fetch(Func<TEntity> predicate);
+        IQueryable<TEntity> Fetch(Func<TEntity, Boolean> predicate);
     }
 }

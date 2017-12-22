@@ -42,11 +42,24 @@ namespace org.aoas.cache
         /// <summary>
         /// 创建 <see cref="MemoryCache{TKey, TValue}"/> 类型的新实例
         /// </summary>
-        /// <param name="context">缓存上下文 <see cref="ICacheContext"/> 实例</param>
+        /// <param name="context">缓存上下文 <see cref="ICacheContext"/> 实例 .</param>
         protected MemoryCache(ICacheContext context)
             :base(context)
         {
             _cacheList = new ConcurrentBag<TValue>();
+        }
+
+        /// <summary>
+        /// 创建 <see cref="MemoryCache{TKey, TValue}"/> 类型的新实例
+        /// </summary>
+        /// <param name="items">初始化时缓存数据对象</param>
+        /// <param name="context">缓存上下文 <see cref="ICacheContext"/> 实例 .</param>
+        /// <exception cref="ArgumentNullException">items 是 null .</exception>
+        protected MemoryCache(IEnumerable<TValue> items, ICacheContext context)
+            :base(context)
+        {
+            items.ThrowIfNull(nameof(items));
+            _cacheList = new ConcurrentBag<TValue>(items);
         }
 
         protected override void OnCacheInvalidCallback()

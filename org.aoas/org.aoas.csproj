@@ -49,6 +49,7 @@
     <Compile Include="cache\ICachePolicy.cs" />
     <Compile Include="cache\ICacheContext.cs" />
     <Compile Include="cache\MemoryCache.cs" />
+    <Compile Include="cache\TimeoutCachePolicy.cs" />
     <Compile Include="CancellationProvider.cs" />
     <Compile Include="config\XmlConfiguration.cs" />
     <Compile Include="config\XmlConfigurationArray.cs" />

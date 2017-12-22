@@ -40,11 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ICache.cs" />
+    <Compile Include="IAlertCategoryRepository.cs" />
+    <Compile Include="IAlertTotalWithinAreaRepository.cs" />
+    <Compile Include="IAreaInfRepository.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="IUnitWork.cs" />
-    <Compile Include="MemoryCache.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\org.aoas.app.common\org.aoas.app.common.csproj">

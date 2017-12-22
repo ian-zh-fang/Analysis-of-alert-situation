@@ -110,17 +110,16 @@ namespace org.aoas.cache
             base.Dispose(disposing);
             _policy.Dispose();
         }
-
-
+        
         /// <summary>
         /// 设置缓存中指定 key 的数据对象为指定的 value 值 .
-        /// 若缓冲中不存在指定的 key，那么增加指定的 value 数据对象到缓存中 .
         /// </summary>
         /// <param name="key">指定的 key .</param>
         /// <param name="value">指定的 value .</param>
         protected virtual void OnSet(TKey key, TValue value)
         {
-
+            ((ICache<TKey, TValue>)this).Remove(key);
+            ((ICache<TKey, TValue>)this).Add(value);
         }
 
         /// <summary>

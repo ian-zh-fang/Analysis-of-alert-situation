@@ -25,7 +25,7 @@ namespace org.aoas.app.repository.entity
     /// <summary>
     /// 辖区信息
     /// </summary>
-    public sealed class AreaInf
+    public sealed class AreaInf : BaseEntityKeyInt64
     {
         /// <summary>
         /// 辖区名称
@@ -46,5 +46,17 @@ namespace org.aoas.app.repository.entity
         /// 上一级辖区标识
         /// </summary>
         public int Pid { get; set; }
+
+        /// <summary>
+        /// 是否删除
+        /// </summary>
+        public byte IsDel { get; set; }
+
+        /// <summary>
+        /// 同步主键 ID
+        /// </summary>
+        public string SyncId { get; set; }
+
+        protected override KeyContext Context => KeyContext.TableAreaInf;
     }
 }
