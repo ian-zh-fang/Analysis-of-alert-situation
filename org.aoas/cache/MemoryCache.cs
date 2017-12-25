@@ -104,6 +104,11 @@ namespace org.aoas.cache
             _cacheList = null;
         }
 
+        protected override IEnumerator<TValue> GetEnumerator()
+        {
+            return _cacheList.GetEnumerator();
+        }
+
         /// <summary>
         /// 加载数据对象，并返回一组加载的数据对象集合
         /// </summary>

@@ -45,7 +45,7 @@ namespace org.aoas.app.repository.entity
         /// <summary>
         /// 上一级辖区标识
         /// </summary>
-        public int Pid { get; set; }
+        public long Pid { get; set; }
 
         /// <summary>
         /// 是否删除

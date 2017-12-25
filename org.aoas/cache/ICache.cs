@@ -30,7 +30,7 @@ namespace org.aoas.cache
     /// </summary>
     /// <typeparam name="TKey">缓存数据对象 key 类型</typeparam>
     /// <typeparam name="TValue">还出数据对象 value 类型</typeparam>
-    public interface ICache<TKey, TValue> : IDisposable
+    public interface ICache<TKey, TValue> : IEnumerable<TValue>, IDisposable
     {
         /// <summary>
         /// 增加指定的数据对象到缓存中

@@ -23,6 +23,7 @@
 namespace org.aoas.cache
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -93,6 +94,16 @@ namespace org.aoas.cache
             value.ThrowIfNull(nameof(key));
             OnSet(key, value);
         }
+        
+        IEnumerator<TValue> IEnumerable<TValue>.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return ((IEnumerable<TValue>)this).GetEnumerator();
+        }
 
         /// <summary>
         /// 校验缓存是否失效，
@@ -121,6 +132,12 @@ namespace org.aoas.cache
             ((ICache<TKey, TValue>)this).Remove(key);
             ((ICache<TKey, TValue>)this).Add(value);
         }
+
+        /// <summary>
+        /// 获取当前枚举类型
+        /// </summary>
+        /// <returns></returns>
+        protected abstract IEnumerator<TValue> GetEnumerator();
 
         /// <summary>
         /// 缓存失效回调
