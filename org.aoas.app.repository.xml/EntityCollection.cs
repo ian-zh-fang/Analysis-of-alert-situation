@@ -23,7 +23,6 @@
 namespace org.aoas.app.repository.xml
 {
     using System;
-    using System.Xml;
     using org.aoas.attributes;
     using org.aoas.config;
 
@@ -32,17 +31,12 @@ namespace org.aoas.app.repository.xml
     /// </summary>
     /// <typeparam name="TKey"></typeparam>
     /// <typeparam name="TCollection"></typeparam>
-    internal abstract class EntityCollection<TCollection> : XmlConfigurationArray<TCollection>
-        where TCollection : XmlConfigurationArray<TCollection>, new()
+    public abstract class EntityCollection<TCollection> : XmlConfigurationArray<TCollection>
+        where TCollection : XmlConfigurationElement
     {
         protected EntityCollection(string addElementName = "entity", string removeElementName = "remove", string clearElementName = "clear")
             : base(addElementName, removeElementName, clearElementName)
         { }
-
-        protected override TCollection OnGetChildElement(XmlReader reader)
-        {
-            return new TCollection();
-        }
     }
 
     /// <summary>
@@ -50,9 +44,9 @@ namespace org.aoas.app.repository.xml
     /// </summary>
     /// <typeparam name="TKey"></typeparam>
     /// <typeparam name="TCollection"></typeparam>
-    internal abstract class IdentityEntityCollection<TKey, TCollection> : EntityCollection<TCollection>
-        where TKey : IComparable, IConvertible, IComparable<TKey>, IEquatable<TKey>
-        where TCollection : XmlConfigurationArray<TCollection>, new()
+    public abstract class IdentityEntityCollection<TKey, TCollection> : EntityCollection<TCollection>
+        where TKey : IComparable, IComparable<TKey>, IEquatable<TKey>
+        where TCollection : XmlConfigurationElement
     {
         protected IdentityEntityCollection(string addElementName = "entity", string removeElementName = "remove", string clearElementName = "clear")
             : base(addElementName, removeElementName, clearElementName)
@@ -69,10 +63,10 @@ namespace org.aoas.app.repository.xml
     /// 旨在声明一组具有父子关系数据对象上下文基础结构
     /// </summary>
     /// <typeparam name="TKey">父子标识字段类型</typeparam>
-    /// <typeparam name="TCollection">数据对象</typeparam>
-    internal abstract class ParentEntityCollection<TKey, TCollection> : IdentityEntityCollection<TKey, TCollection>
-        where TKey : IComparable, IConvertible, IComparable<TKey>, IEquatable<TKey>
-        where TCollection : XmlConfigurationArray<TCollection>, new()
+    /// <typeparam name="TCollection">数据对象</typeparam> 
+    public abstract class ParentEntityCollection<TKey, TCollection> : IdentityEntityCollection<TKey, TCollection>
+        where TKey : IComparable, IComparable<TKey>, IEquatable<TKey>
+        where TCollection : XmlConfigurationElement
     {
         protected ParentEntityCollection(string addElementName = "entity", string removeElementName = "remove", string clearElementName = "clear")
             : base(addElementName, removeElementName, clearElementName)

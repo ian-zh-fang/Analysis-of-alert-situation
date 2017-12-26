@@ -46,7 +46,7 @@ namespace org.aoas.config
         /// <param name="finder"></param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="exceptions.FileNotFoundException">配置文件查找失败</exception>
-        protected XmlConfiguration(string sectionName, string rootName, string fileName, file.IFileFinder finder)
+        protected XmlConfiguration(string sectionName, string rootName, string fileName, IFileFinder finder)
         {
             sectionName.ThrowIfWhitespace(nameof(sectionName));
             rootName.ThrowIfWhitespace(nameof(rootName));

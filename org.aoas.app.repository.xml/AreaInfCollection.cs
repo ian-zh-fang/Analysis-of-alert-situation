@@ -23,6 +23,7 @@
 namespace org.aoas.app.repository.xml
 {
     using System;
+    using System.Xml;
 
     /// <summary>
     /// 辖区信息数据对象结构实现
@@ -33,6 +34,11 @@ namespace org.aoas.app.repository.xml
         /// 创建 <see cref="AreaInfCollection"/> 辖区信息数据实例对象
         /// </summary>
         public AreaInfCollection() : base() { }
+
+        protected override AreaInfCollection OnGetChildElement(XmlReader reader)
+        {
+            return new AreaInfCollection();
+        }
 
         public static explicit operator AreaInfCollection(entity.AreaInf inf)
         {

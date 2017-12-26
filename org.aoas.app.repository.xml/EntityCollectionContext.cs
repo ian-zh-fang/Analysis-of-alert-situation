@@ -22,7 +22,6 @@
 
 namespace org.aoas.app.repository.xml
 {
-    using System;
     using System.Collections;
     using System.Collections.Generic;
     using org.aoas.attributes;
@@ -34,11 +33,10 @@ namespace org.aoas.app.repository.xml
     /// </summary>
     /// <typeparam name="TKey"></typeparam>
     /// <typeparam name="TCollection"></typeparam>
-    internal sealed class EntityCollectionContext<TKey, TCollection> 
+    public sealed class EntityCollectionContext<TCollection> 
         : XmlConfiguration
         , IEnumerable<TCollection>
-        where TKey : IComparable, IConvertible, IComparable<TKey>, IEquatable<TKey>
-        where TCollection : XmlConfigurationArray<TCollection>, new()
+        where TCollection : XmlConfigurationElement
     {
         /// <summary>
         /// 创建 <see cref="EntityCollectionContext{TKey, TCollection}"/> 类型的数据集合上下文对象
@@ -71,7 +69,7 @@ namespace org.aoas.app.repository.xml
         /// 数据对象集合
         /// </summary>
         [Alias("entities")]
-        public IdentityEntityCollection<TKey, TCollection> Collection { get; set; }
+        public EntityCollection<TCollection> Collection { get; set; }
 
         IEnumerator<TCollection> IEnumerable<TCollection>.GetEnumerator()
         {

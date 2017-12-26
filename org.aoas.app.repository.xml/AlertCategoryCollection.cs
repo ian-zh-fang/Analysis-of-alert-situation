@@ -23,6 +23,7 @@
 namespace org.aoas.app.repository.xml
 {
     using System;
+    using System.Xml;
 
     /// <summary>
     /// 警情类型数据对象结构实现
@@ -33,6 +34,11 @@ namespace org.aoas.app.repository.xml
         /// 创建 <see cref="AlertCategoryCollection"/> 警情类型数据对象集合实例
         /// </summary>
         public AlertCategoryCollection() : base() { }
+
+        protected override AlertCategoryCollection OnGetChildElement(XmlReader reader)
+        {
+            return new AlertCategoryCollection();
+        }
 
         public static explicit operator AlertCategoryCollection(entity.AlertCategory category)
         {

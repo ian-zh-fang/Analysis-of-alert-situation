@@ -31,7 +31,7 @@ namespace org.aoas.app.repository.entity
     /// </summary>
     /// <typeparam name="TKey">主键类型，通常应该是基元类型。如：int16,int32,int64 ...</typeparam>
     public abstract class BaseEntity<TKey>
-        where TKey : IComparable, IConvertible, IComparable<TKey>, IEquatable<TKey>
+        where TKey : IComparable, IComparable<TKey>, IEquatable<TKey>
     {
         /// <summary>
         /// 创建 <see cref="BaseEntity{TKey}"/> 的新实例，这是一种受保护机制的构造函数

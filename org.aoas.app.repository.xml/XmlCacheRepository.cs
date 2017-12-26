@@ -31,44 +31,51 @@ namespace org.aoas.app.repository.xml
     /// <typeparam name="TEntity"></typeparam>
     /// <typeparam name="TEntityKey"></typeparam>
     /// <typeparam name="TData"></typeparam>
-    public abstract class XmlCacheRepository<TEntity, TEntityKey, TData>
-        : XmlRepository<TEntity, TEntityKey, TData>
+    public abstract class XmlCacheRepository<TKey, TEntity, TData>
+        : XmlRepository<TEntity, TData>
         , ICacheContext
-        where TEntityKey : IComparable, IConvertible, IComparable<TEntityKey>, IEquatable<TEntityKey>
-        where TData : config.XmlConfigurationArray<TData>, new()
+        where TData : EntityCollection<TData>
     {
-        // 缓存上下文初始化时，发生当前事件
-        private event Action _eventInit;
+        // 缓存上下文实例初始化时，发生当前事件
+        private event Action _eventInited;
 
-        // 缓存上下文数据发生变化时，发生当前事件
-        private event Action _eventChange;
+        // 缓存上下文内容发生变化时，发生当前事件
+        private event Action _eventChanged;
 
         // 缓存上下文
-        private readonly ICache<TEntityKey, TEntity> _cache;
+        private ICache<TKey, TEntity> _cache;
 
-        /// <summary>
-        /// 创建 <see cref="XmlCacheRepository{TEntity, TEntityKey, TData}"/> 缓存 XML 文件数据仓储的实例
-        /// </summary>
-        /// <param name="fileName">数据文件名称</param>
-        /// <param name="section">数据节点名称</param>
-        /// <param name="root">数据根节点名称</param>
-        /// <param name="dirs">数据文件可能存在的目录</param>
         protected XmlCacheRepository(string fileName = "data.xml", string section = "context", string root = "data", params string[] dirs)
-            :base(fileName, section, root, dirs)
+            : base(fileName, section, root, dirs)
         { }
+
+        protected override void OnInit(EntityCollectionContext<TData> collection)
+        {
+            base.OnInit(collection);
+            _cache = InitCache(collection);
+        }
+
+        // 初始化缓存上下文实例
+        private ICache<TKey, TEntity> InitCache(EntityCollectionContext<TData> collection)
+        {
+            var cache = GetCache(collection, this);
+            cache.ThrowIfNull(nameof(cache));
+
+            return cache;
+        }
 
         event Action ICacheContext.OnInit
         {
             add
             {
                 if (value.IsNull()) { return; }
-                _eventInit += value;
+                _eventInited += value;
             }
 
             remove
             {
                 if (value.IsNull()) { return; }
-                _eventInit -= value;
+                _eventInited -= value;
             }
         }
 
@@ -77,14 +84,37 @@ namespace org.aoas.app.repository.xml
             add
             {
                 if (value.IsNull()) { return; }
-                _eventChange += value;
+                _eventChanged += value;
             }
 
             remove
             {
                 if (value.IsNull()) { return; }
-                _eventChange -= value;
+                _eventChanged -= value;
             }
+        }
+
+        /// <summary>
+        /// 获取缓存上下文实例
+        /// </summary>
+        /// <param name="collection"><see cref="EntityCollectionContext{TCollection}"/> XML 数据集合上下文</param>
+        /// <param name="context"><see cref="ICacheContext"/> 缓存上下文实例</param>
+        protected abstract XmlCache<TEntity> GetCache(EntityCollectionContext<TData> collection, ICacheContext context);
+
+        /// <summary>
+        /// 旨在实现支持 XML 数据集合上下文业务处理功能模块
+        /// </summary>
+        /// <typeparam name="TValue"></typeparam>
+        internal protected abstract class XmlCache<TValue> : MemoryCache<TKey, TValue>
+        {
+            /// <summary>
+            /// 创建 <see cref="XmlCache{TValue}"/> XML 数据集合上下文缓存实例
+            /// </summary>
+            /// <param name="collection"><see cref="EntityCollectionContext{TCollection}"/> XML 数据集合上下文</param>
+            /// <param name="context"><see cref="ICacheContext"/> 缓存上下文实例</param>
+            protected XmlCache(EntityCollectionContext<TData> collection, ICacheContext context)
+                :base(context)
+            { }
         }
     }
 }

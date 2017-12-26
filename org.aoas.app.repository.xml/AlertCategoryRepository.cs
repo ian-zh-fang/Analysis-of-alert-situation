@@ -22,7 +22,7 @@
 
 namespace org.aoas.app.repository.xml
 {
-    public class AlertCategoryRepository
+    public sealed class AlertCategoryRepository
     {
     }
 }
