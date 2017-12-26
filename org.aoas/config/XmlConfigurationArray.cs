@@ -28,12 +28,10 @@ namespace org.aoas.config
     using System.Reflection;
     using System.Xml;
 
-    /// <summary>
-    /// 旨在定义一种集合配置项的基础内容结构
-    /// </summary>
-    public abstract class XmlConfigurationArray
+    public abstract class XmlConfigurationArray<TElement>
         : XmlConfigurationElement
-        , IEnumerable<XmlConfigurationElement>
+        , IEnumerable<TElement>
+        where TElement : XmlConfigurationElement
     {
         // add 节点名称
         private readonly string _addElementName;
@@ -42,7 +40,7 @@ namespace org.aoas.config
         // clear 节点名称
         private readonly string _clearElementName;
 
-        private readonly List<XmlConfigurationElement> _collection;
+        private readonly List<TElement> _collection;
 
         protected XmlConfigurationArray(string addElementName, string removeElementName = "remove", string clearElementName = "clear")
         {
@@ -53,35 +51,29 @@ namespace org.aoas.config
             _addElementName = addElementName;
             _removeElementName = removeElementName;
             _clearElementName = clearElementName;
-            _collection = new List<XmlConfigurationElement>();
+            _collection = new List<TElement>();
         }
 
         protected XmlConfigurationArray() : this("add") { }
 
-        protected XmlConfigurationArray(IEnumerable<XmlConfigurationElement> collection)
-            : this()
-        {
-            _collection.AddRange(collection);
-        }
-
-        public void Add(XmlConfigurationElement item)
-        {
-            _collection.Add(item);
-        }
-
-        public void AddRange(IEnumerable<XmlConfigurationElement> items)
-        {
-            _collection.AddRange(items);
-        }
-
-        IEnumerator<XmlConfigurationElement> IEnumerable<XmlConfigurationElement>.GetEnumerator()
+        IEnumerator<TElement> IEnumerable<TElement>.GetEnumerator()
         {
             return _collection.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return ((IEnumerable<XmlConfigurationElement>)this).GetEnumerator();
+            return ((IEnumerable<TElement>)this).GetEnumerator();
+        }
+
+        public void Add(TElement item)
+        {
+            _collection.Add(item);
+        }
+
+        public void AddRange(IEnumerable<TElement> items)
+        {
+            _collection.AddRange(items);
         }
 
         protected override void OnSerialize(XmlWriter writer)
@@ -94,7 +86,7 @@ namespace org.aoas.config
                 writer.WriteEndElement();
             });
         }
-        
+
         protected override void OnDeserializeElement(XmlReader reader, PropertyInfo[] properties)
         {
             var name = reader.Name;
@@ -136,11 +128,25 @@ namespace org.aoas.config
         {
             _collection.Clear();
         }
-        
+
         /// <summary>
         /// 获取当前节点对应实体对象
         /// </summary>
         /// <returns></returns>
-        protected abstract XmlConfigurationElement OnGetChildElement(XmlReader reader);
+        protected abstract TElement OnGetChildElement(XmlReader reader);
+    }
+
+    /// <summary>
+    /// 旨在定义一种集合配置项的基础内容结构
+    /// </summary>
+    public abstract class XmlConfigurationArray
+        : XmlConfigurationArray<XmlConfigurationElement>
+        , IEnumerable<XmlConfigurationElement>
+    {
+        protected XmlConfigurationArray(string addElementName, string removeElementName = "remove", string clearElementName = "clear")
+            : base(addElementName, removeElementName, clearElementName)
+        { }
+
+        protected XmlConfigurationArray() : this("add") { }
     }
 }

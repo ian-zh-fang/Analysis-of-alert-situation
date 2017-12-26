@@ -32,14 +32,14 @@ namespace org.aoas.app.repository.xml
     /// </summary>
     /// <typeparam name="TKey"></typeparam>
     /// <typeparam name="TCollection"></typeparam>
-    internal abstract class EntityCollection<TCollection> : XmlConfigurationArray
-        where TCollection : EntityCollection<TCollection>, new()
+    internal abstract class EntityCollection<TCollection> : XmlConfigurationArray<TCollection>
+        where TCollection : XmlConfigurationArray<TCollection>, new()
     {
         protected EntityCollection(string addElementName = "entity", string removeElementName = "remove", string clearElementName = "clear")
             : base(addElementName, removeElementName, clearElementName)
         { }
 
-        protected override XmlConfigurationElement OnGetChildElement(XmlReader reader)
+        protected override TCollection OnGetChildElement(XmlReader reader)
         {
             return new TCollection();
         }
@@ -52,17 +52,15 @@ namespace org.aoas.app.repository.xml
     /// <typeparam name="TCollection"></typeparam>
     internal abstract class IdentityEntityCollection<TKey, TCollection> : EntityCollection<TCollection>
         where TKey : IComparable, IConvertible, IComparable<TKey>, IEquatable<TKey>
-        where TCollection : IdentityEntityCollection<TKey, TCollection>, new()
+        where TCollection : XmlConfigurationArray<TCollection>, new()
     {
         protected IdentityEntityCollection(string addElementName = "entity", string removeElementName = "remove", string clearElementName = "clear")
             : base(addElementName, removeElementName, clearElementName)
         { }
 
-        protected override XmlConfigurationElement OnGetChildElement(XmlReader reader)
-        {
-            return new TCollection();
-        }
-
+        /// <summary>
+        /// 唯一标识
+        /// </summary>
         [Alias("id")]
         public TKey Id { get; set; }
     }
@@ -74,12 +72,15 @@ namespace org.aoas.app.repository.xml
     /// <typeparam name="TCollection">数据对象</typeparam>
     internal abstract class ParentEntityCollection<TKey, TCollection> : IdentityEntityCollection<TKey, TCollection>
         where TKey : IComparable, IConvertible, IComparable<TKey>, IEquatable<TKey>
-        where TCollection : ParentEntityCollection<TKey, TCollection>, new()
+        where TCollection : XmlConfigurationArray<TCollection>, new()
     {
-        protected ParentEntityCollection(string addElementName = "add", string removeElementName = "remove", string clearElementName = "clear")
+        protected ParentEntityCollection(string addElementName = "entity", string removeElementName = "remove", string clearElementName = "clear")
             : base(addElementName, removeElementName, clearElementName)
         { }
 
+        /// <summary>
+        /// 父级唯一标识
+        /// </summary>
         [Alias("pid")]
         public TKey Pid { get; set; }
     }

@@ -33,7 +33,7 @@ namespace org.aoas.app.repository.xml
     /// </summary>
     public abstract class XmlRepository<TEntity, TEntityKey, TData> : Repository<TEntity>
         where TEntityKey : IComparable, IConvertible, IComparable<TEntityKey>, IEquatable<TEntityKey>
-        where TData : config.XmlConfigurationElement, new()
+        where TData : config.XmlConfigurationArray<TData>, new()
     {
         // 数据集合上下文节点名称
         private readonly string _section;
@@ -48,7 +48,7 @@ namespace org.aoas.app.repository.xml
         private readonly string[] _dirs;
 
         /// <summary>
-        /// 创建
+        /// 创建 <see cref="XmlRepository{TEntity, TEntityKey, TData}"/> XML 文件数据仓储的实例
         /// </summary>
         /// <param name="fileName">数据文件名称</param>
         /// <param name="section">数据节点名称</param>
@@ -112,29 +112,32 @@ namespace org.aoas.app.repository.xml
         /// <returns></returns>
         private IEnumerable<TEntity> GetCollection()
         {
-            throw new NotImplementedException();
-
-            //var arr = GetCollection(_section, _root, _filename, _dirs);
-            //return GetCollection(arr);
+            var arr = OnRead(_section, _root, _filename, _dirs);
+            return GetCollection(arr);
         }
 
-        //protected virtual IEnumerable<TEntity> GetCollection(EntityCollectionContext<TEntityKey, TData> collection)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        /// <summary>
+        /// 从指定的数据集合中获取数据对象集合上下文，并返回一个数据对象集合上下文
+        /// </summary>
+        /// <param name="collection">数据集合上下文</param>
+        /// <returns></returns>
+        protected virtual IEnumerable<TEntity> GetCollection(IEnumerable<TData> collection)
+        {
+            return collection.Select(t => ConverFrom(t));
+        }
 
-        ///// <summary>
-        ///// 获取指定 XML 数据文件的数据内容，并返回数据集合上下文对象
-        ///// </summary>
-        ///// <param name="section">数据节点名称</param>
-        ///// <param name="root">数据根节点名称</param>
-        ///// <param name="fileName">数据文件名称</param>
-        ///// <param name="fileDirs">数据文件可能存放路径</param>
-        ///// <returns></returns>
-        //private EntityCollectionContext<TEntityKey, TData> GetCollection(string section, string root, string fileName, string[] fileDirs)
-        //{
-        //    return new EntityCollectionContext<TEntityKey, TData>(fileName, section, root, fileDirs);
-        //}
+        /// <summary>
+        /// 读取 XML 数据文件的数据内容，并返回数据集合上下文对象
+        /// </summary>
+        /// <param name="section">数据节点名称</param>
+        /// <param name="root">数据根节点名称</param>
+        /// <param name="fileName">数据文件名称</param>
+        /// <param name="dirs">数据文件可能存放路径</param>
+        /// <returns></returns>
+        protected virtual IEnumerable<TData> OnRead(string section, string root, string fileName, string[] dirs)
+        {
+            return new EntityCollectionContext<TEntityKey, TData>(fileName, section, root, dirs);
+        }
 
         /// <summary>
         /// 将指定的数据对象添加到数据集合上下文中，并返回被添加的数据对象
