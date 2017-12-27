@@ -22,6 +22,7 @@
 
 namespace org.aoas.app.repository.xml
 {
+    using System;
     using System.Collections;
     using System.Collections.Generic;
     using org.aoas.attributes;
@@ -36,8 +37,12 @@ namespace org.aoas.app.repository.xml
     public sealed class EntityCollectionContext<TCollection> 
         : XmlConfiguration
         , IEnumerable<TCollection>
+        , IDisposable
         where TCollection : XmlConfigurationElement
     {
+        // 当前对象释放标识，true 标识已释放；否则，标识尚未释放
+        private bool _isDisposed;
+
         /// <summary>
         /// 创建 <see cref="EntityCollectionContext{TKey, TCollection}"/> 类型的数据集合上下文对象
         /// </summary>
@@ -47,7 +52,9 @@ namespace org.aoas.app.repository.xml
         /// <param name="dirs">数据文件可能存在的目录</param>
         public EntityCollectionContext(string fileName, string section = "data", string root = "context", params string[] dirs)
             : base(section, root, fileName, new FileFinder(dirs))
-        { }
+        {
+            _isDisposed = false;
+        }
 
         //DOM 结构为：
         // <context>
@@ -71,6 +78,28 @@ namespace org.aoas.app.repository.xml
         [Alias("entities")]
         public EntityCollection<TCollection> Collection { get; set; }
 
+        public void Dispose()
+        {
+            Disposed(disposing: true);
+            GC.SuppressFinalize(this);
+        }
+
+        private void Disposed(bool disposing)
+        {
+            if (_isDisposed) { return; }
+            _isDisposed = true;
+
+            Collection = null;
+        }
+
+        /// <summary>
+        /// 重新加载数据上下文
+        /// </summary>
+        public void ReLoad()
+        {
+            Init();
+        }
+
         IEnumerator<TCollection> IEnumerable<TCollection>.GetEnumerator()
         {
             return ((IEnumerable<TCollection>)Collection).GetEnumerator();
@@ -79,6 +108,11 @@ namespace org.aoas.app.repository.xml
         IEnumerator IEnumerable.GetEnumerator()
         {
             return ((IEnumerable<TCollection>)this).GetEnumerator();
+        }
+
+        ~EntityCollectionContext()
+        {
+            Disposed(disposing: false);
         }
     }
 }

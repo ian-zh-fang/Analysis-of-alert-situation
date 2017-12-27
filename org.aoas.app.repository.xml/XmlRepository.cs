@@ -39,7 +39,7 @@ namespace org.aoas.app.repository.xml
         private readonly EntityCollectionContext<TData> _collection;
 
         /// <summary>
-        /// 创建 <see cref="XmlRepository{TEntity, TEntityKey, TData}"/> XML 文件数据仓储的实例
+        /// 创建 <see cref="XmlRepository{TEntity, TData}"/> XML 文件数据仓储的实例
         /// </summary>
         /// <param name="fileName">数据文件名称</param>
         /// <param name="section">数据节点名称</param>
@@ -60,6 +60,34 @@ namespace org.aoas.app.repository.xml
         /// 初始化 <see cref="XmlRepository{TEntity, TData}"/> XML 数据仓储对象内核
         /// </summary>
         protected virtual void OnInit(EntityCollectionContext<TData> collection) { }
+
+        /// <summary>
+        /// 保存所有的变更内容，保存成功，返回 1；否则，返回 -1 .
+        /// </summary>
+        protected sealed override int OnSave()
+        {
+            if (OnSaveChanges()) { return 1; }
+
+            return -1;
+        }
+
+        /// <summary>
+        /// 保存所有变更内容，保存成功，返回 true；否则，返回 false .
+        /// </summary>
+        /// <returns></returns>
+        protected virtual bool OnSaveChanges()
+        {
+            _collection.SaveAs();
+            return true;
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+
+            // 释放资源
+            _collection.Dispose();
+        }
 
         // 初始化数据对象集合上下文
         private EntityCollectionContext<TData> InitCollection(string section, string root, string fileName, string[] dirs)

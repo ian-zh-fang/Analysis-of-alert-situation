@@ -47,7 +47,6 @@
     <Compile Include="EntityCollection.cs" />
     <Compile Include="EntityCollectionContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="EntityCollectionCache.cs" />
     <Compile Include="XmlCacheRepository.cs" />
     <Compile Include="XmlRepository.cs" />
   </ItemGroup>

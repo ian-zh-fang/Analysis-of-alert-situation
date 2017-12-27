@@ -110,6 +110,14 @@ namespace org.aoas.cache
         }
 
         /// <summary>
+        /// <see cref="TValue"/> 数据默认值
+        /// </summary>
+        protected virtual TValue DefaultValue
+        {
+            get { return default(TValue); }
+        }
+
+        /// <summary>
         /// 加载数据对象，并返回一组加载的数据对象集合
         /// </summary>
         /// <returns></returns>
